@@ -80,6 +80,7 @@ public class CheckParamExceptionHandler {
             respCaller.setRspCode(ParamCallerConstant.PARAM_ERROR);
             respCaller.setRspDesc(sb.toString());
             capResponse.setRsp(respCaller);
+            logger.info("CAP-RESP："+capResponse);
             return capResponse;
         }catch (Exception e){
             return getCapResponse();
@@ -93,6 +94,12 @@ public class CheckParamExceptionHandler {
             String message = e.getConstraintViolations().stream().map(ConstraintViolation::getMessage).collect(Collectors.joining());
             Set<ConstraintViolation<?>> set= e.getConstraintViolations();
             for(ConstraintViolation<?> info:set){
+                if(logger==null){
+                    logger= LoggerFactory.getLogger(info.getRootBeanClass().getClass());
+                }
+                if(logger==null){
+                    logger=LoggerFactory.getLogger(CheckParamExceptionHandler.class);
+                }
                 List<String> emptyInfoList=EmptyContant.emptyInfoList;
                 String messe=info.getMessage();
                 if(emptyInfoList==null ||emptyInfoList.size()<1){
@@ -110,6 +117,7 @@ public class CheckParamExceptionHandler {
             respCaller.setRspCode(ParamCallerConstant.PARAM_ERROR);
             respCaller.setRspDesc(message);
             capResponse.setRsp(respCaller);
+            logger.info("CAP-RESP："+capResponse);
             return capResponse;
         }catch (Exception ex){
             return getCapResponse();
@@ -149,6 +157,9 @@ public class CheckParamExceptionHandler {
     }
 
     private CapResponse getCapResponse(){
+        if(logger==null){
+            logger=LoggerFactory.getLogger(CheckParamExceptionHandler.class);
+        }
         CapResponse capResponse=new CapResponse();
         capResponse.setMsg("请求参数非空或有误，请核查参数");
         capResponse.setStatus(ServiceConstant.STATUS_SUCCESS);
@@ -156,6 +167,7 @@ public class CheckParamExceptionHandler {
         respCaller.setRspCode(ParamCallerConstant.PARAM_ERROR);
         respCaller.setRspDesc("请求参数非空或有误，请核查参数");
         capResponse.setRsp(respCaller);
+        logger.info("CAP-RESP："+capResponse);
         return capResponse;
     }
 

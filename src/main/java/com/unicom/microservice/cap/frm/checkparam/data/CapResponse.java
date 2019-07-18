@@ -19,6 +19,7 @@ import org.slf4j.MDC;
 public class CapResponse {
 
     private static Logger logger =  LoggerFactory.getLogger(CapResponse.class);
+
     @ApiModelProperty(name = "STATUS", value = "服务请求结果编码", required = true, example = "0000")
     @JsonProperty("STATUS")
     @JSONField(name = "STATUS")
@@ -96,5 +97,20 @@ public class CapResponse {
             logger.error("获取服务调用链txid异常",e);
             return ServiceConstant.TXID_FAIL;
         }
+    }
+
+    /**
+     * 统一返回实体
+     */
+    public static CapResponse respCapResponse(String msg, String status, String respCode, String respMsg){
+        CapResponse capResponse = new CapResponse();
+        capResponse.setMsg(msg);
+        capResponse.setStatus(status);
+        RespCaller resp = new RespCaller();
+        resp.setRspCode(respCode);
+        resp.setRspDesc(respMsg);
+        capResponse.setRsp(resp);
+        logger.info("CAP-RESP："+capResponse);
+        return capResponse;
     }
 }
