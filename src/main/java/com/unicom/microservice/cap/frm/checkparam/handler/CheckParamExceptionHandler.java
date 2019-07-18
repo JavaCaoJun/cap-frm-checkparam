@@ -40,32 +40,32 @@ public class CheckParamExceptionHandler {
     private static Logger logger = null;
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public CapResponse MethodArgumentNotValidHandler(MethodArgumentNotValidException handler){
+    public CapResponse MethodArgumentNotValidHandler(MethodArgumentNotValidException handler) {
         try {
             //String message = handler.getBindingResult().getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.joining());
-            BindingResult bindingResult=handler.getBindingResult();
+            BindingResult bindingResult = handler.getBindingResult();
             //获取对应的类
-            MethodParameter parameter=handler.getParameter();
-            Method method=parameter.getMethod();
-            if(logger==null){
-                logger= LoggerFactory.getLogger(method.getDeclaringClass());
+            MethodParameter parameter = handler.getParameter();
+            Method method = parameter.getMethod();
+            if (logger == null) {
+                logger = LoggerFactory.getLogger(method.getDeclaringClass());
             }
-            if(logger==null){
-                logger=LoggerFactory.getLogger(CheckParamExceptionHandler.class);
+            if (logger == null) {
+                logger = LoggerFactory.getLogger(CheckParamExceptionHandler.class);
             }
-            logger.info("CAP-REQ"+JSONObject.toJSONString(bindingResult.getTarget()));
+            logger.info("CAP-REQ" + JSONObject.toJSONString(bindingResult.getTarget()));
             StringBuffer sb = new StringBuffer();
             List<ObjectError> objectErrors = bindingResult.getAllErrors();
-            List<String> emptyInfoList=EmptyContant.emptyInfoList;
-            if(emptyInfoList==null ||emptyInfoList.size()<1){
+            List<String> emptyInfoList = EmptyContant.emptyInfoList;
+            if (emptyInfoList == null || emptyInfoList.size() < 1) {
                 emptyInfoList.add("不能为null");
                 emptyInfoList.add("不能为空");
             }
             for (ObjectError objectError : objectErrors) {
                 String defaulMessage = objectError.getDefaultMessage();
-                Object[] objects=objectError.getArguments();
-                DefaultMessageSourceResolvable dfd=(DefaultMessageSourceResolvable)objects[0];
-                String emptyObject=dfd.getDefaultMessage();
+                Object[] objects = objectError.getArguments();
+                DefaultMessageSourceResolvable dfd = (DefaultMessageSourceResolvable) objects[0];
+                String emptyObject = dfd.getDefaultMessage();
                 if (emptyInfoList.contains(defaulMessage)) {
                     sb.append(emptyObject);
                     sb.append(defaulMessage);
@@ -73,16 +73,16 @@ public class CheckParamExceptionHandler {
                     sb.append(defaulMessage);
                 }
             }
-            CapResponse capResponse=new CapResponse();
+            CapResponse capResponse = new CapResponse();
             capResponse.setMsg(ServiceConstant.MSG_EINVAL);
             capResponse.setStatus(ServiceConstant.STATUS_SUCCESS);
-            RespCaller respCaller=new RespCaller();
+            RespCaller respCaller = new RespCaller();
             respCaller.setRspCode(ParamCallerConstant.PARAM_ERROR);
             respCaller.setRspDesc(sb.toString());
             capResponse.setRsp(respCaller);
-            logger.info("CAP-RESP："+capResponse);
+            logger.info("CAP-RESP：" + capResponse);
             return capResponse;
-        }catch (Exception e){
+        } catch (Exception e) {
             return getCapResponse();
         }
 
@@ -92,34 +92,34 @@ public class CheckParamExceptionHandler {
     public CapResponse ConstraintViolationExceptionHandler(ConstraintViolationException e) {
         try {
             String message = e.getConstraintViolations().stream().map(ConstraintViolation::getMessage).collect(Collectors.joining());
-            Set<ConstraintViolation<?>> set= e.getConstraintViolations();
-            for(ConstraintViolation<?> info:set){
-                if(logger==null){
-                    logger= LoggerFactory.getLogger(info.getRootBeanClass().getClass());
+            Set<ConstraintViolation<?>> set = e.getConstraintViolations();
+            for (ConstraintViolation<?> info : set) {
+                if (logger == null) {
+                    logger = LoggerFactory.getLogger(info.getRootBean().getClass());
                 }
-                if(logger==null){
-                    logger=LoggerFactory.getLogger(CheckParamExceptionHandler.class);
+                if (logger == null) {
+                    logger = LoggerFactory.getLogger(CheckParamExceptionHandler.class);
                 }
-                List<String> emptyInfoList=EmptyContant.emptyInfoList;
-                String messe=info.getMessage();
-                if(emptyInfoList==null ||emptyInfoList.size()<1){
+                List<String> emptyInfoList = EmptyContant.emptyInfoList;
+                String messe = info.getMessage();
+                if (emptyInfoList == null || emptyInfoList.size() < 1) {
                     emptyInfoList.add("不能为null");
                     emptyInfoList.add("不能为空");
                 }
-                if(emptyInfoList.contains(messe)){
+                if (emptyInfoList.contains(messe)) {
                     throw new Exception();
                 }
             }
-            CapResponse capResponse=new CapResponse();
+            CapResponse capResponse = new CapResponse();
             capResponse.setMsg(ServiceConstant.MSG_EINVAL);
             capResponse.setStatus(ServiceConstant.STATUS_SUCCESS);
-            RespCaller respCaller=new RespCaller();
+            RespCaller respCaller = new RespCaller();
             respCaller.setRspCode(ParamCallerConstant.PARAM_ERROR);
             respCaller.setRspDesc(message);
             capResponse.setRsp(respCaller);
-            logger.info("CAP-RESP："+capResponse);
+            logger.info("CAP-RESP：" + capResponse);
             return capResponse;
-        }catch (Exception ex){
+        } catch (Exception ex) {
             return getCapResponse();
         }
     }
@@ -130,12 +130,12 @@ public class CheckParamExceptionHandler {
             //String message = e.getBindingResult().getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.joining());
             StringBuffer sb = new StringBuffer();
             List<ObjectError> objectErrors = e.getBindingResult().getAllErrors();
-            List<String> emptyInfoList=EmptyContant.emptyInfoList;
+            List<String> emptyInfoList = EmptyContant.emptyInfoList;
             for (ObjectError objectError : objectErrors) {
                 String defaulMessage = objectError.getDefaultMessage();
-                Object[] objects=objectError.getArguments();
-                DefaultMessageSourceResolvable dfd=(DefaultMessageSourceResolvable)objects[0];
-                String emptyObject=dfd.getDefaultMessage();
+                Object[] objects = objectError.getArguments();
+                DefaultMessageSourceResolvable dfd = (DefaultMessageSourceResolvable) objects[0];
+                String emptyObject = dfd.getDefaultMessage();
                 if (emptyInfoList.contains(defaulMessage)) {
                     sb.append(emptyObject);
                     sb.append(defaulMessage);
@@ -143,31 +143,31 @@ public class CheckParamExceptionHandler {
                     sb.append(defaulMessage);
                 }
             }
-            CapResponse capResponse=new CapResponse();
+            CapResponse capResponse = new CapResponse();
             capResponse.setMsg(ServiceConstant.MSG_EINVAL);
             capResponse.setStatus(ServiceConstant.STATUS_SUCCESS);
-            RespCaller respCaller=new RespCaller();
+            RespCaller respCaller = new RespCaller();
             respCaller.setRspCode(ParamCallerConstant.PARAM_ERROR);
             respCaller.setRspDesc(sb.toString());
             capResponse.setRsp(respCaller);
             return capResponse;
-        }catch (Exception ex){
+        } catch (Exception ex) {
             return getCapResponse();
         }
     }
 
-    private CapResponse getCapResponse(){
-        if(logger==null){
-            logger=LoggerFactory.getLogger(CheckParamExceptionHandler.class);
+    private CapResponse getCapResponse() {
+        if (logger == null) {
+            logger = LoggerFactory.getLogger(CheckParamExceptionHandler.class);
         }
-        CapResponse capResponse=new CapResponse();
+        CapResponse capResponse = new CapResponse();
         capResponse.setMsg("请求参数非空或有误，请核查参数");
         capResponse.setStatus(ServiceConstant.STATUS_SUCCESS);
-        RespCaller respCaller=new RespCaller();
+        RespCaller respCaller = new RespCaller();
         respCaller.setRspCode(ParamCallerConstant.PARAM_ERROR);
         respCaller.setRspDesc("请求参数非空或有误，请核查参数");
         capResponse.setRsp(respCaller);
-        logger.info("CAP-RESP："+capResponse);
+        logger.info("CAP-RESP：" + capResponse);
         return capResponse;
     }
 

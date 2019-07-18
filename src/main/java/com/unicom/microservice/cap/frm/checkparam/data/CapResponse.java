@@ -110,7 +110,16 @@ public class CapResponse {
         resp.setRspCode(respCode);
         resp.setRspDesc(respMsg);
         capResponse.setRsp(resp);
-        logger.info("CAP-RESP："+capResponse);
         return capResponse;
+    }
+
+    @Override
+    public String toString() {
+        return "CapResponse{" +
+                "status='" + status + '\'' +
+                ", msg='" + msg + '\'' +
+                ", txid='" + txid + '\'' +
+                ", rsp=" + rsp +
+                '}';
     }
 }
