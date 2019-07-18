@@ -39,4 +39,11 @@ public class RespCaller {
         this.rspDesc = rspDesc;
     }
 
+    @Override
+    public String toString() {
+        return "RespCaller{" +
+                "rspCode='" + rspCode + '\'' +
+                ", rspDesc='" + rspDesc + '\'' +
+                '}';
+    }
 }
