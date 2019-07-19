@@ -53,7 +53,7 @@ public class CheckParamExceptionHandler {
             if (logger == null) {
                 logger = LoggerFactory.getLogger(CheckParamExceptionHandler.class);
             }
-            logger.info("CAP-REQ" + JSONObject.toJSONString(bindingResult.getTarget()));
+            logger.info("CAP-REQ：" + JSONObject.toJSONString(bindingResult.getTarget()));
             StringBuffer sb = new StringBuffer();
             List<ObjectError> objectErrors = bindingResult.getAllErrors();
             List<String> emptyInfoList = EmptyContant.emptyInfoList;

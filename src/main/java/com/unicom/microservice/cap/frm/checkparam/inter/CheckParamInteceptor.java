@@ -56,16 +56,16 @@ public class CheckParamInteceptor {
             }
             String paramStr = sb.toString();
             if(paramStr.length()==1){
-                logger.info("CAP-REQ" + ParamCallerConstant.LEFT_BRACKET + ParamCallerConstant.RIGHT_BRACKET);
+                logger.info("CAP-REQ：" + ParamCallerConstant.LEFT_BRACKET + ParamCallerConstant.RIGHT_BRACKET);
             }else {
                 String paramStrFinal = paramStr.substring(0, paramStr.length() - 1);
-                logger.info("CAP-REQ" + paramStrFinal + ParamCallerConstant.RIGHT_BRACKET);
+                logger.info("CAP-REQ：" + paramStrFinal + ParamCallerConstant.RIGHT_BRACKET);
             }
         } else {
             List<Object> logArgs = StreamUtil.streamOf(joinPoint.getArgs())
                     .filter(arg -> (!(arg instanceof HttpServletRequest) && !(arg instanceof HttpServletResponse)))
                     .collect(Collectors.toList());
-            logger.info(JSONObject.toJSONString(logArgs));
+            logger.info("CAP-REQ：" +JSONObject.toJSONString(logArgs));
         }
     }
 
