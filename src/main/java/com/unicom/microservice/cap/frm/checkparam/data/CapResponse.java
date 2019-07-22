@@ -1,9 +1,9 @@
 package com.unicom.microservice.cap.frm.checkparam.data;
 
 import ch.qos.logback.classic.spi.LoggingEvent;
-import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.gson.Gson;
 import com.unicom.microservice.cap.frm.checkparam.constant.ServiceConstant;
 import io.swagger.annotations.ApiModelProperty;
 import org.slf4j.Logger;
@@ -116,6 +116,7 @@ public class CapResponse {
 
     @Override
     public String toString() {
-        return JSONObject.toJSONString(this);
+        Gson gson=new Gson();
+        return gson.toJson(this);
     }
 }
