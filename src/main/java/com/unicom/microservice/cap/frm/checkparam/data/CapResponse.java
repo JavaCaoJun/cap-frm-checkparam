@@ -1,6 +1,7 @@
 package com.unicom.microservice.cap.frm.checkparam.data;
 
 import ch.qos.logback.classic.spi.LoggingEvent;
+import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.unicom.microservice.cap.frm.checkparam.constant.ServiceConstant;
@@ -115,11 +116,6 @@ public class CapResponse {
 
     @Override
     public String toString() {
-        return "CapResponse{" +
-                "status='" + status + '\'' +
-                ", msg='" + msg + '\'' +
-                ", txid='" + txid + '\'' +
-                ", rsp=" + rsp +
-                '}';
+        return JSONObject.toJSONString(this);
     }
 }
