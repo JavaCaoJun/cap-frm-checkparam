@@ -4,6 +4,7 @@ import ch.qos.logback.classic.spi.LoggingEvent;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.gson.Gson;
+import com.google.gson.annotations.SerializedName;
 import com.unicom.microservice.cap.frm.checkparam.constant.ServiceConstant;
 import io.swagger.annotations.ApiModelProperty;
 import org.slf4j.Logger;
@@ -24,18 +25,22 @@ public class CapResponse {
     @ApiModelProperty(name = "STATUS", value = "服务请求结果编码", required = true, example = "0000")
     @JsonProperty("STATUS")
     @JSONField(name = "STATUS")
+    @SerializedName("STATUS")
     private String status;
     @ApiModelProperty(name = "MSG", value = "服务请求结果描述", required = true, example = "服务调用成功！")
     @JSONField(name = "MSG")
     @JsonProperty("MSG")
+    @SerializedName("MSG")
     private String msg;
     @ApiModelProperty(name = "TXID", value = "服务流水号(自动生成)", required = true, example = "b393548b3dc5^1504165518997^70")
     @JSONField(name = "TXID")
     @JsonProperty("TXID")
+    @SerializedName("TXID")
     private String txid;
     @ApiModelProperty(name = "RSP", value = "服务返回业务数据", required = true)
     @JSONField(name = "RSP")
     @JsonProperty("RSP")
+    @SerializedName("RSP")
     private RespCaller rsp;
 
     /**

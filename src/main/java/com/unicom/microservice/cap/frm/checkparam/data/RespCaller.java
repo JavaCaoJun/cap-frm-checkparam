@@ -2,6 +2,7 @@ package com.unicom.microservice.cap.frm.checkparam.data;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.gson.annotations.SerializedName;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
@@ -15,11 +16,13 @@ public class RespCaller {
     @ApiModelProperty(name = "RSP_CODE", value = "业务返回编码", required = true, example = "0000")
     @JsonProperty("RSP_CODE")
     @JSONField(name = "RSP_CODE")
+    @SerializedName("RSP_CODE")
     private String rspCode;
 
     @ApiModelProperty(name = "RSP_DESC", value = "业务返回描述", required = true, example = "success")
     @JsonProperty("RSP_DESC")
     @JSONField(name = "RSP_DESC")
+    @SerializedName("RSP_DESC")
     private String rspDesc;
 
 
