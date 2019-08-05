@@ -1,4 +1,4 @@
-package com.unicom.microservice.cap.frm.checkparam.util;
+package com.unicom.microser.cap.frm.checkparam.util;
 
 import org.apache.commons.lang3.ArrayUtils;
 

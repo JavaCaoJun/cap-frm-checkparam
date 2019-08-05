@@ -1,4 +1,4 @@
-package com.unicom.microservice.cap.frm.checkparam.constant;
+package com.unicom.microser.cap.frm.checkparam.constant;
 
 import java.util.ArrayList;
 import java.util.List;

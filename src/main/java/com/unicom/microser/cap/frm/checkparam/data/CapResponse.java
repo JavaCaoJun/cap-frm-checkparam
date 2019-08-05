@@ -1,11 +1,11 @@
-package com.unicom.microservice.cap.frm.checkparam.data;
+package com.unicom.microser.cap.frm.checkparam.data;
 
 import ch.qos.logback.classic.spi.LoggingEvent;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
-import com.unicom.microservice.cap.frm.checkparam.constant.ServiceConstant;
+import com.unicom.microser.cap.frm.checkparam.constant.ServiceConstant;
 import io.swagger.annotations.ApiModelProperty;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
