@@ -1,4 +1,4 @@
-package com.unicom.microserv.cap.frm.checkparam.constant;
+package com.unicom.microserv.cap.auc.frm.checkparam.constant;
 
 /**
  * <div style="font-weight: 900">Description:</div>

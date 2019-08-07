@@ -1,11 +1,11 @@
-package com.unicom.microserv.cap.frm.checkparam.handler;
+package com.unicom.microserv.cap.auc.frm.checkparam.handler;
 
 import com.alibaba.fastjson.JSONObject;
-import com.unicom.microserv.cap.frm.checkparam.constant.EmptyContant;
-import com.unicom.microserv.cap.frm.checkparam.constant.ParamCallerConstant;
-import com.unicom.microserv.cap.frm.checkparam.constant.ServiceConstant;
-import com.unicom.microserv.cap.frm.checkparam.data.CapResponse;
-import com.unicom.microserv.cap.frm.checkparam.data.RespCaller;
+import com.unicom.microserv.cap.auc.frm.checkparam.constant.EmptyContant;
+import com.unicom.microserv.cap.auc.frm.checkparam.constant.ParamCallerConstant;
+import com.unicom.microserv.cap.auc.frm.checkparam.constant.ServiceConstant;
+import com.unicom.microserv.cap.auc.frm.checkparam.data.CapResponse;
+import com.unicom.microserv.cap.auc.frm.checkparam.data.RespCaller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
@@ -21,10 +21,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import java.lang.reflect.Method;
-;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+;
 
 /**
  * <div style="font-weight: 900">Description:</div>

@@ -1,4 +1,4 @@
-package com.unicom.microserv.cap.frm.checkparam.data;
+package com.unicom.microserv.cap.auc.frm.checkparam.data;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonProperty;

@@ -1,8 +1,8 @@
-package com.unicom.microserv.cap.frm.checkparam.inter;
+package com.unicom.microserv.cap.auc.frm.checkparam.inter;
 
 import com.alibaba.fastjson.JSONObject;
-import com.unicom.microserv.cap.frm.checkparam.constant.ParamCallerConstant;
-import com.unicom.microserv.cap.frm.checkparam.util.StreamUtil;
+import com.unicom.microserv.cap.auc.frm.checkparam.constant.ParamCallerConstant;
+import com.unicom.microserv.cap.auc.frm.checkparam.util.StreamUtil;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Aspect;
@@ -34,7 +34,7 @@ public class CheckParamInteceptor {
 
     public static Logger logger = null;
 
-    @Before("com.unicom.microserv.cap.frm.checkparam.inter.CheckParamInteceptor.pointCut()")
+    @Before("com.unicom.microserv.cap.auc.frm.checkparam.inter.CheckParamInteceptor.pointCut()")
     public void checkParam(JoinPoint joinPoint) throws ClassNotFoundException, IOException {
         Signature signature = joinPoint.getSignature();
         if (logger == null) {
