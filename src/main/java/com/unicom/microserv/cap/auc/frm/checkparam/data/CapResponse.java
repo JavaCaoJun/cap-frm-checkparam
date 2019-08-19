@@ -20,7 +20,7 @@ import org.slf4j.MDC;
  */
 public class CapResponse {
 
-    private static Logger logger =  LoggerFactory.getLogger(CapResponse.class);
+    private static Logger logger = LoggerFactory.getLogger(CapResponse.class);
 
     @ApiModelProperty(name = "STATUS", value = "服务请求结果编码", required = true, example = "0000")
     @JsonProperty("STATUS")
@@ -46,13 +46,14 @@ public class CapResponse {
     /**
      * 默认构造函数
      */
-    public CapResponse(){
-        try{
+    public CapResponse() {
+        try {
             this.txid = this.generateTxid();
-        }catch (Exception e){
+        } catch (Exception e) {
             logger.error("can not get PtxId:", e);
         }
     }
+
     public String getStatus() {
         return status;
     }
@@ -84,23 +85,25 @@ public class CapResponse {
     public void setRsp(RespCaller rsp) {
         this.rsp = rsp;
     }
+
     /**
      * 请统一使用此方法获取txid
      * 获取Ptxid，截取后作为流水号txid，规则"容器ID-容器创建时间戳-被调用序号"
+     *
      * @return (String) txid
      */
-    public static String generateTxid(){
-        try{
+    public static String generateTxid() {
+        try {
             //实例化一个LoggingEvent对象，触发子线程拷贝MDC
-            new LoggingEvent("mdcTrigger", (ch.qos.logback.classic.Logger)logger, null, null, null, null);
+            new LoggingEvent("mdcTrigger", (ch.qos.logback.classic.Logger) logger, null, null, null, null);
             String txid = MDC.get("PtxId");
-            if (txid == null){
+            if (txid == null) {
                 logger.error("txid is null");
                 return ServiceConstant.TXID_FAIL;
             }
             return txid;
-        } catch(Exception e){
-            logger.error("获取服务调用链txid异常",e);
+        } catch (Exception e) {
+            logger.error("获取服务调用链txid异常", e);
             return ServiceConstant.TXID_FAIL;
         }
     }
@@ -108,7 +111,7 @@ public class CapResponse {
     /**
      * 统一返回实体
      */
-    public static CapResponse respCapResponse(String msg, String status, String respCode, String respMsg,RespCaller resp){
+    public static CapResponse respCapResponse(String msg, String status, RespCaller resp) {
         CapResponse capResponse = new CapResponse();
         capResponse.setMsg(msg);
         capResponse.setStatus(status);
@@ -121,7 +124,7 @@ public class CapResponse {
 
     @Override
     public String toString() {
-        Gson gson=new Gson();
+        Gson gson = new Gson();
         return gson.toJson(this);
     }
 }
