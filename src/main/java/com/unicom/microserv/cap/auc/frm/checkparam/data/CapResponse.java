@@ -108,13 +108,13 @@ public class CapResponse {
     /**
      * 统一返回实体
      */
-    public static CapResponse respCapResponse(String msg, String status, String respCode, String respMsg){
+    public static CapResponse respCapResponse(String msg, String status, String respCode, String respMsg,RespCaller resp){
         CapResponse capResponse = new CapResponse();
         capResponse.setMsg(msg);
         capResponse.setStatus(status);
-        RespCaller resp = new RespCaller();
-        resp.setRspCode(respCode);
-        resp.setRspDesc(respMsg);
+        //RespCaller resp = new RespCaller();
+//        resp.setRspCode(respCode);
+//        resp.setRspDesc(respMsg);
         capResponse.setRsp(resp);
         return capResponse;
     }
